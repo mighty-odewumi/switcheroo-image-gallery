@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-container {
+  background-color: rgba(197, 207, 219, 0.671);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding: 0 24px;
+}
+
+form {
+  background-color: whitesmoke;
+  padding: 24px;
+  border-radius: 10px;
+}
+
+form h1 {
+  font-size: large;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+input, form button {
+  width: 100%;
+  padding: 10px 10px;
+  border: 1px solid hsl(230, 12%, 80%);
+  border-radius: 4px;
+}
+
+input {
+  margin: 8px 0 16px;
+  background: hsl(230, 17%, 93%);
+}
+
+form button {
+  background: rgb(75, 86, 230);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main-page {
+  background-color: white;
+  padding: 24px;
+}
+
+.main-page h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.main-page button {
+  margin-bottom: 24px;
+  background-color: rgb(75, 86, 230);
+  color: white;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.grid-mode {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.image {
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.grid-img {
+  height: 100px;
+}
+
+
+@media screen and (min-width: 600px) {
+
+  form {
+    width: 50%;
+    margin: auto;
+  }
+
+  .main-page {
+    width: 60%;
+    margin: auto;
+  }
+}

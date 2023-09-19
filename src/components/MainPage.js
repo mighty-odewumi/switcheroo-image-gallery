@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useEffect, useState, useRef } from "react";
+// import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 // import { GridContextProvider, GridDropZone, GridItem, swap } from "react-grid-dnd";
 // import imageList  from "./imageList";
 import axios from "axios";
 import Spinner from "./Spinner";
+import Search from "./Search";
+import Card from "./Card";
 
 
 export default function MainPage() {
@@ -15,6 +17,12 @@ export default function MainPage() {
   const [edit, setEdit] = useState(false);
 
   const APIKey = "39525959-f994fd0eed6343ce54200241c";
+
+  const [formData, setFormData] = useState({
+    search: "",
+  });
+
+  const [error, setError] = useState(false);
 
   const url = `https://pixabay.com/api/?key=${APIKey}&q=yellow+flowers&image_type=photo&per_page=8`;
 
@@ -57,6 +65,45 @@ export default function MainPage() {
     setEdit(!edit);
   }
 
+
+  // Filters image from the list based on the tag
+  function searchImage(searchInput) {
+    const prevData = [...imageData];
+    console.log(prevData);
+
+    const filteredImages = imageData.filter(image => {
+      const tag = image.tags.split(",")[0];
+      return tag === searchInput;
+    });
+    console.log(filteredImages);
+
+    if (filteredImages.length !== 0) {
+      setImageData(filteredImages);
+      console.log(prevData);
+    }
+    
+    else if (filteredImages.length === 0) {
+      console.log("Image not found");
+      setError(true);
+   }
+   console.log(prevData);
+  }
+
+  function handleChange(e) {
+    const {name, value} = e.target;
+    setFormData(prevValue => ({
+      ...prevValue,
+      [name]: value,
+    }));
+  }
+
+  console.log(formData);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    searchImage(formData.search);
+  }
+
   console.log(edit);
 
   console.log(imageData);
@@ -68,42 +115,28 @@ export default function MainPage() {
   }
 
   else if (!loading) {
-    gallery =  (
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId="image">
-          {(provided) => (
-            <section 
-              className={`gallery-container ${edit ? "edit-mode" : "grid-mode"}`}
-              {...provided.droppableProps} 
-              ref={provided.innerRef}
-            >
-              {imageData.map(({id, previewURL, tags}, index) => {
-                return (
-                  <Draggable key={id} index={index} draggableId={id.toString()}>
-                    {(provided) => (
-                        <img 
-                          src={`${previewURL}`} 
-                          alt={`${tags}`} 
-                          className={`image ${edit ? "" : "grid-img"}`} 
-                          ref={provided.innerRef} 
-                          {...provided.draggableProps} 
-                          {...provided.dragHandleProps}
-                        />
-                    )}
-                  </Draggable>
-                )
-              })}
-              {provided.placeholder}
-            </section> 
-          )}
-        </Droppable>
-      </DragDropContext> 
-   );
+    gallery = (
+      <Card 
+        handleDragEnd={handleDragEnd}
+        edit={edit}
+        imageData={imageData}
+      />
+    )
+  }
+
+  if (error) {
+    gallery = <p>Image not found</p>;
   }
 
   return (
     <div className="main-page">
-      <h1>Drag and Drop Images</h1>
+      <h1>Switcheroo (Drag and Drop Images)</h1>
+
+      <Search 
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+
       <button 
         className="toggle-btn"
         onClick={toggleEdit}
@@ -116,8 +149,44 @@ export default function MainPage() {
 }
 
 
-
-
+/* gallery =  (
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="image">
+          {(provided) => (
+            <section 
+              className={`gallery-container ${edit ? "edit-mode" : "grid-mode"}`}
+              {...provided.droppableProps} 
+              ref={provided.innerRef}
+            >
+              {imageData.map(({id, previewURL, tags}, index) => {
+                const tag = tags.split(",")[0];
+                console.log(tag);
+                return (
+                  <Draggable key={id} index={index} draggableId={id.toString()}>
+                    {(provided) => (
+                      <div 
+                        className="img-container"
+                        ref={provided.innerRef} 
+                        {...provided.draggableProps} 
+                        {...provided.dragHandleProps}
+                      >
+                        <img 
+                          src={`${previewURL}`} 
+                          alt={`${tags}`} 
+                          className={`image ${edit ? "" : "grid-img"}`} 
+                        />
+                        <span>{tag}</span>
+                      </div>
+                    )}
+                  </Draggable>
+                )
+              })}
+              {provided.placeholder}
+            </section> 
+          )}
+        </Droppable>
+      </DragDropContext> 
+   ); */
 
 /*   <GridContextProvider onChange={onChange}>
         <GridDropZone

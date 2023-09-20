@@ -50,6 +50,14 @@ input, .login-form button {
   cursor: pointer;
 }
 
+.login-form p {
+  margin-top: 16px;
+}
+
+.login-form p span {
+  font-weight: bold;
+}
+
 .main-page {
   padding: 24px;
 }
@@ -82,6 +90,11 @@ nav h3 {
   cursor: pointer;
 }
 
+.toggle-btn:hover, .toggle-btn:focus {
+  box-shadow: 0 5px 15px hsl(0, 11%, 75%);
+  font-weight: bold;
+}
+
 .search-form {
   padding: 4px 16px;
   border-radius: 40px;
@@ -97,6 +110,7 @@ nav h3 {
 .search-btn {
   background: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .search-icon {

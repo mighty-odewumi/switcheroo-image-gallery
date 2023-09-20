@@ -9,9 +9,6 @@ export default function Login({formData, setFormData, checkAuthentication}) {
     }));
   }
 
-  console.log(formData);
-
-
   // Called when the user clicks on the login button or the enter key
   function handleSubmit(e) {
     e.preventDefault();
@@ -50,6 +47,9 @@ export default function Login({formData, setFormData, checkAuthentication}) {
             />
           </label>
           <button>Sign in</button>
+
+          <p>Default Email: <span>user@example.com</span></p>
+          <p>Default Password: <span>1Password</span></p>
         </form>
       </div>
     </>

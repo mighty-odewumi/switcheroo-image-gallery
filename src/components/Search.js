@@ -1,10 +1,10 @@
-import searchIcon from "../assets/Search.svg";
+import searchIcon from "../assets/search1.svg";
 
 
 export default function Search({handleSubmit, handleChange}) {
 
   return (
-    <form>
+    <form className="search-form">
       <input 
         type="search" 
         id="search-bar"

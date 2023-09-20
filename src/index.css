@@ -109,7 +109,7 @@ input, .login-form button {
   width: 100%;
   margin: 10px 0;
   border-radius: 10px; 
-  filter: brightness(70%);
+  filter: brightness(90%);
   transition: ease 3s;
 }
 
@@ -156,7 +156,7 @@ span {
   }
 
   .search-form {
-    width: 70%;
+    width: 100%;
   }
 
   .search-form input {

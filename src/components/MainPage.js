@@ -4,7 +4,7 @@ import axios from "axios";
 import Spinner from "./Spinner";
 import Search from "./Search";
 import Card from "./Card";
-
+import Header from "./Header";
 
 export default function MainPage({toast, ToastContainer}) {
 
@@ -19,8 +19,6 @@ export default function MainPage({toast, ToastContainer}) {
   const [formData, setFormData] = useState({
     search: "",
   });
-
-  const [error, setError] = useState(false);
 
   const url = `https://pixabay.com/api/?key=${APIKey}&q=parkour&image_type=photo&per_page=20`;
 
@@ -71,21 +69,21 @@ export default function MainPage({toast, ToastContainer}) {
 
     const filteredImages = imageData.filter(image => {
       const tag = image.tags.split(",")[0];
-      return tag === searchInput.toLowerCase();
+      return (tag === searchInput.toLowerCase());
     });
-    console.log(filteredImages);
+
+    // I could implement a logic that splits the tag  and search input into an array and then check if the letters are the same.
 
     if (filteredImages.length !== 0) {
       setImageData(filteredImages);
     }
     
     else if (filteredImages.length === 0) {
-      console.log("Image not found");
-      setError(true);
       toast.error("Image not found");
     }
   }
 
+  // Checks for a change in the input form
   function handleChange(e) {
     const {name, value} = e.target;
     setFormData(prevValue => ({
@@ -93,8 +91,6 @@ export default function MainPage({toast, ToastContainer}) {
       [name]: value,
     }));
   }
-
-  console.log(formData);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -121,25 +117,27 @@ export default function MainPage({toast, ToastContainer}) {
 
 
   return (
-    <div className="main-page">
-      <h1>Switcheroo - Image Gallery</h1>
+    <>
+      <Header />
 
-      <Search 
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
+      <div className="main-page">
+        <Search 
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
 
-      <button 
-        className="toggle-btn"
-        onClick={toggleEdit}
-      >
-        {edit ? "Go to Grid Mode" : "Go To Edit Mode"}
-      </button>
-      {gallery}
+        <button 
+          className="toggle-btn"
+          onClick={toggleEdit}
+        >
+          {edit ? "Go to Grid Mode" : "Go To Edit Mode"}
+        </button>
+        {gallery}
 
-      <ToastContainer />
-      
-    </div>
+        <ToastContainer />
+        
+      </div>
+    </>
   )
 }
 
@@ -204,3 +202,34 @@ export default function MainPage({toast, ToastContainer}) {
 
         </GridDropZone>
       </GridContextProvider> */
+
+
+/* 
+      const tagArray = tag.split("");
+      const searchArray = searchInput.split("");
+      // console.log(tagArray);
+      // console.log(searchArray);
+
+      console.log("Testing for equality", tag.localeCompare(searchInput));
+
+      const mappedSearchArray = searchArray.map(letter => {
+        return tagArray.includes(letter);
+      });
+      // console.log(mappedSearchArray);
+
+      const trueResultLen = Math.floor(mappedSearchArray.length / 2);
+
+      const slicedSearchArray = mappedSearchArray.slice(0, trueResultLen);
+
+      slicedSearchArray.map(bool => {
+        if (bool === true) {
+          // return console.log(image);
+        }
+      })
+
+      if (tag.localeCompare(searchInput) === 0) {
+        return image;
+      }
+
+      // return tag.localeCompare(searchInput) === 0;
+       */

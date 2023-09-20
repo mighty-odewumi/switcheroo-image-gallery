@@ -115,12 +115,14 @@ export default function MainPage({toast, ToastContainer}) {
     )
   }
 
-
   return (
     <>
       <Header />
 
       <div className="main-page">
+
+        <h2>Drag and Drop images to rearrange your gallery</h2>
+
         <Search 
           handleChange={handleChange}
           handleSubmit={handleSubmit}

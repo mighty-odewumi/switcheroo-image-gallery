@@ -68,6 +68,10 @@ nav h3 {
   margin-right: auto;
 }
 
+.main-page h2 {
+  text-align: center;
+}
+
 .toggle-btn {
   margin-bottom: 24px;
   background-color: rgb(75, 86, 230);

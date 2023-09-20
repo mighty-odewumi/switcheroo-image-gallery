@@ -6,7 +6,7 @@ Image Gallery Site that enables users to drag and drop images to rearrange.
 
 * React
 * Pure CSS
-* Pexels Image API
+* Pixabay Image API
 
 # Setup
 

@@ -6,7 +6,7 @@ import Search from "./Search";
 import Card from "./Card";
 
 
-export default function MainPage() {
+export default function MainPage({toast, ToastContainer}) {
 
   const [imageData, setImageData] = useState([]);
 
@@ -77,14 +77,13 @@ export default function MainPage() {
 
     if (filteredImages.length !== 0) {
       setImageData(filteredImages);
-      console.log(prevData);
     }
     
     else if (filteredImages.length === 0) {
       console.log("Image not found");
       setError(true);
+      toast.error("Image not found");
     }
-    console.log(prevData);
   }
 
   function handleChange(e) {
@@ -101,8 +100,6 @@ export default function MainPage() {
     e.preventDefault();
     searchImage(formData.search);
   }
-
-  console.log(edit);
 
   console.log(imageData);
 
@@ -122,9 +119,6 @@ export default function MainPage() {
     )
   }
 
-  if (error) {
-    gallery = <p>Image not found</p>;
-  }
 
   return (
     <div className="main-page">
@@ -142,6 +136,9 @@ export default function MainPage() {
         {edit ? "Go to Grid Mode" : "Go To Edit Mode"}
       </button>
       {gallery}
+
+      <ToastContainer />
+      
     </div>
   )
 }
@@ -186,7 +183,7 @@ export default function MainPage() {
       </DragDropContext> 
    ); */
 
-   
+
 /*   <GridContextProvider onChange={onChange}>
 
         <GridDropZone

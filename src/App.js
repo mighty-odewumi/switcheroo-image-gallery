@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/Login";
 import MainPage from "./components/MainPage";
+
 
 export default function App() {
 
@@ -15,11 +18,11 @@ export default function App() {
     if (data.email === "user@example.com" && data.password === "1Password") {
       setIsAuthenticated(true);
       console.log("Authentication Successful!!!");
-      alert("Login Successful");
+      toast.success("Login Successful");
     } else {
       setIsAuthenticated(false);
       console.log("Authentication Failed!!!");
-      alert("Login failed");
+      toast.error("Login failed");
     }
   }
 
@@ -34,8 +37,15 @@ export default function App() {
               setFormData={setFormData}
               checkAuthentication={checkAuthentication}
             />
-          : <MainPage />
+          : (
+              <MainPage 
+                toast={toast}
+                ToastContainer={ToastContainer}
+              />
+            )
       }
+
+      <ToastContainer />
     </> 
   )
 }

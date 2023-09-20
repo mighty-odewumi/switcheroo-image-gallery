@@ -1,7 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-// import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 // import { GridContextProvider, GridDropZone, GridItem, swap } from "react-grid-dnd";
-// import imageList  from "./imageList";
 import axios from "axios";
 import Spinner from "./Spinner";
 import Search from "./Search";
@@ -24,7 +22,7 @@ export default function MainPage() {
 
   const [error, setError] = useState(false);
 
-  const url = `https://pixabay.com/api/?key=${APIKey}&q=yellow+flowers&image_type=photo&per_page=8`;
+  const url = `https://pixabay.com/api/?key=${APIKey}&q=parkour&image_type=photo&per_page=20`;
 
 
   // Fetch image data from Pexels API
@@ -73,7 +71,7 @@ export default function MainPage() {
 
     const filteredImages = imageData.filter(image => {
       const tag = image.tags.split(",")[0];
-      return tag === searchInput;
+      return tag === searchInput.toLowerCase();
     });
     console.log(filteredImages);
 
@@ -85,8 +83,8 @@ export default function MainPage() {
     else if (filteredImages.length === 0) {
       console.log("Image not found");
       setError(true);
-   }
-   console.log(prevData);
+    }
+    console.log(prevData);
   }
 
   function handleChange(e) {
@@ -130,7 +128,7 @@ export default function MainPage() {
 
   return (
     <div className="main-page">
-      <h1>Switcheroo (Drag and Drop Images)</h1>
+      <h1>Switcheroo - Image Gallery</h1>
 
       <Search 
         handleChange={handleChange}
@@ -188,7 +186,9 @@ export default function MainPage() {
       </DragDropContext> 
    ); */
 
+   
 /*   <GridContextProvider onChange={onChange}>
+
         <GridDropZone
           id="images"
           boxesPerRow={2}

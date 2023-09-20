@@ -23,7 +23,7 @@ export default function Login({formData, setFormData, checkAuthentication}) {
     <>
       <div className="form-container">
         
-        <form onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
           <h1>Log in To Your Account</h1>
 
           <label htmlFor="email">

@@ -18,10 +18,11 @@ body {
   padding: 0 24px;
 }
 
-form {
+.login-form {
   background-color: whitesmoke;
   padding: 24px;
   border-radius: 10px;
+  max-width: 500px;
 }
 
 form h1 {
@@ -30,19 +31,19 @@ form h1 {
   margin-bottom: 24px;
 }
 
-input, form button {
+input, .login-form button {
   width: 100%;
   padding: 10px 10px;
   border: 1px solid hsl(230, 12%, 80%);
   border-radius: 4px;
 }
 
-input {
+.login-form input {
   margin: 8px 0 16px;
   background: hsl(230, 17%, 93%);
 }
 
-form button {
+.login-form button {
   background: rgb(75, 86, 230);
   color: white;
   font-weight: bold;
@@ -50,7 +51,6 @@ form button {
 }
 
 .main-page {
-  background-color: white;
   padding: 24px;
 }
 
@@ -59,7 +59,7 @@ form button {
   margin-bottom: 24px;
 }
 
-.main-page button {
+.toggle-btn {
   margin-bottom: 24px;
   background-color: rgb(75, 86, 230);
   color: white;
@@ -67,6 +67,36 @@ form button {
   border-radius: 4px;
   border: none;
   cursor: pointer;
+}
+
+.search-form {
+  padding: 4px 16px;
+  border-radius: 40px;
+  border: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 5px 15px hsl(0, 11%, 85%);
+  margin-bottom: 24px;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+}
+
+.search-icon {
+  width: 20px;
+}
+
+.search-form input {
+  width: 100%;
+  margin: 0px 8px;
+  border: none;
+}
+
+.search-form input[type="search"]:focus {
+  outline: none;
 }
 
 .grid-mode {
@@ -78,14 +108,42 @@ form button {
 .image {
   width: 100%;
   margin: 10px 0;
-  border-radius: 10px;
+  border-radius: 10px; 
+  filter: brightness(70%);
+  transition: ease 3s;
 }
 
 .grid-img {
-  height: 100px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.img-container {
+  position: relative;
+}
+
+span {
+  position: absolute;
+  bottom: 24px;
+  left: 10px;
+  background-color: rgba(197, 207, 219, 0.671);
+  padding: 4px 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+@media screen and (min-width: 500px) {
+  .login-form {
+    max-width: 400px;
+    margin: auto;
+  }
 }
 
 @media screen and (min-width: 600px) {
+
+  body {
+    background-color: rgba(197, 207, 219, 0.671);
+  }
 
   form {
     width: 50%;
@@ -96,4 +154,16 @@ form button {
     width: 60%;
     margin: auto;
   }
+
+  .search-form {
+    width: 70%;
+  }
+
+  .search-form input {
+    background: transparent;
+  }
+
+  .grid-mode {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }  
 }

@@ -1,5 +1,6 @@
 import searchIcon from "../assets/Search.svg";
 
+
 export default function Search({handleSubmit, handleChange}) {
 
   return (

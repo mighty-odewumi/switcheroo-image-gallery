@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 // import { GridContextProvider, GridDropZone, GridItem, swap } from "react-grid-dnd";
 import axios from "axios";
 import Spinner from "./Spinner";
@@ -6,7 +6,7 @@ import Search from "./Search";
 import Card from "./Card";
 import Header from "./Header";
 
-export default function MainPage({toast, ToastContainer}) {
+export default function MainPage({toast, ToastContainer, handleLogOut}) {
 
   const [imageData, setImageData] = useState([]);
 
@@ -32,6 +32,11 @@ export default function MainPage({toast, ToastContainer}) {
         setLoading(false);
       }).catch(error => {
         console.log(error.message);
+
+        setTimeout(() => {
+          toast.error(error.message + "!");
+        }, 5000)
+        
       })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -51,12 +56,9 @@ export default function MainPage({toast, ToastContainer}) {
     setImageData(items);
   }
 
-  // function onChange(sourceId, sourceIndex, targetIndex, targetId) {
-  //   const nextState = swap(imageData, sourceIndex, targetIndex);
-  //   setImageData(nextState);
-  // }
 
   // Function implemented to get around react-beautiful-dnd not supporting grids.
+  // Changes images direct from grid to column and vice versa
   function toggleEdit() {
     setEdit(!edit);
   }
@@ -83,6 +85,7 @@ export default function MainPage({toast, ToastContainer}) {
     }
   }
 
+
   // Checks for a change in the input form
   function handleChange(e) {
     const {name, value} = e.target;
@@ -91,6 +94,7 @@ export default function MainPage({toast, ToastContainer}) {
       [name]: value,
     }));
   }
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -117,7 +121,9 @@ export default function MainPage({toast, ToastContainer}) {
 
   return (
     <>
-      <Header />
+      <Header 
+        handleLogOut={handleLogOut}
+      />
 
       <div className="main-page">
 
@@ -142,6 +148,12 @@ export default function MainPage({toast, ToastContainer}) {
     </>
   )
 }
+
+
+// function onChange(sourceId, sourceIndex, targetIndex, targetId) {
+  //   const nextState = swap(imageData, sourceIndex, targetIndex);
+  //   setImageData(nextState);
+  // }
 
 
 /* gallery =  (

@@ -1,5 +1,6 @@
 export default function Login({formData, setFormData, checkAuthentication}) {
 
+  
   // Checks for a change in the input field
   function handleChange(e) {
     const {name, value} = e.target;
@@ -8,6 +9,7 @@ export default function Login({formData, setFormData, checkAuthentication}) {
       [name]: value,
     }));
   }
+
 
   // Called when the user clicks on the login button or the enter key
   function handleSubmit(e) {
